@@ -73,8 +73,6 @@ SELECT * FROM customers INNER JOIN cusadds ON customers.CusID = cusadds.CusID WH
 SELECT CusNick,AssContent FROM customers INNER JOIN assess ON customers.CusID = assess.CusID GROUP BY AssContent;
 '
 '/*改*/'
-SELECT CusNick,AssContent,assdate FROM customers AS co INNER JOIN assess AS aa ON co.cusid = aa.cusid GROUP BY CusNick ORDER BY assdate DESC;
-
 #查看用户表
 SELECT * FROM customers;
 
@@ -150,15 +148,6 @@ SELECT ClassNumber,AVG(ExamResult) FROM classinfo INNER JOIN studentinfo ON clas
 -- 9.查询所有 3 月份入学男学员，按所在班级分组，要求显示每个班级的考试平均分,并按从高到低排列.（3 表联接）
 '
 select * from studentinfo inner join studentexam ON studentinfo.StuID=studentexam.EStuID inner join classinfo ON classinfo.CTeacherID=studentinfo.SClassID group by CTeacherID having StuSex='男' order by ExamResult desc;
-'
-'/*改*/'
-SELECT ClassID,ClassNumber,AVG(ExamResult) FROM classinfo 
-	INNER JOIN studentinfo ON studentinfo.SClassID = classinfo.ClassID 
-		INNER JOIN studentexam ON studentinfo.StuID = studentexam.EStuID 
-			WHERE MONTH(StuJoinTime)=3 AND StuSex = '男' 
-				GROUP BY ClassID,ClassNumber 
-					ORDER BY AVG(ExamResult) DESC;
-
 
 -- 10.查询每个班主任所带学员信息，要求显示：班主任姓名，班主任联系电话，班级名称，学员姓名，学员学号.(提示：3 表联接)
 SELECT TeacherName,TeacherTel,ClassNumber,StuName,StuCard FROM teacherinfo INNER JOIN classinfo ON teacherinfo.TeacherID=classinfo.CTeacherID INNER JOIN studentinfo ON classinfo.ClassID=studentinfo.SClassID;
