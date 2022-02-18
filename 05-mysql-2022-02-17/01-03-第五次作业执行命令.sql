@@ -37,7 +37,7 @@ SELECT MONTH(CONVERT(OrderDate,DATE)) AS 上月,SUM(ODPrice) FROM orders
 		WHERE MONTH(orderdate)= MONTH(NOW())-1;
 
 -- 10. 查询去年每个商品类别的商品销售总数
-SELECT TypeName,COUNT(ProSale) FROM orders 
+SELECT protypes.TypeID,TypeName,COUNT(ProSale) FROM orders 
 INNER JOIN orderdetail ON orderdetail.OrderNum=orders.OrderNum 
 	INNER JOIN products  ON products.ProID = orderdetail.ProID
 	INNER JOIN protypes ON products.TypeID=protypes.TypeID 
